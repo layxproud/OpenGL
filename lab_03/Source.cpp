@@ -17,7 +17,7 @@ GLfloat octZ = 100.0; // базисная координата по Оz
 
 static bool autoRotateROctY = false; // автоматическое вращение по часовой
 static bool autoRotateLOctY = false; // автоматическое вращение против часовой
-GLint rotateOctCount = 0; // сколько раз нажата клавиша вращени¤
+GLint rotateOctCount = 0; // сколько раз нажата клавиша вращения
 
 GLfloat rotateOctX = 20.0; // коэффициент поворота по Ox
 GLfloat rotateOctY = 20.0; // коэффициент поворота по Oу
@@ -48,14 +48,14 @@ static GLuint list; // переменная для списка
 GLint stripes = 100; // количество полосок
 
 // ----------------- ОСТАЛЬНЫЕ ПАРАМЕТРЫ ----------------------
-GLint speed = 1; // скорость вращени¤
+GLint speed = 1; // скорость вращения
 
 // ------------------- НОРМИРОВАНИЕ ------------------------
 // Функция сделана опираясь на статью "Calculating a Surface Normal"
 // с сайта www.khronos.org/opengl/wiki
 void getNormal(float p1[3], float p2[3], float p3[3], float vNormal[3])
 {
-    float v1[3], v2[3]; // дл¤ промежуточных вычислений
+    float v1[3], v2[3]; // для промежуточных вычислений
     float normal; // норма
 
     v1[0] = p2[0] - p1[0];
@@ -99,7 +99,7 @@ void sideList()
 
     float norm[3] = { 0.0 , 0.0 , 0.0 }; // массив для нормали
     getNormal(point1, point2, point3, norm); // получение нормали
-    glNormal3fv(norm); // нормаль к поверхности останетс¤ неизменной
+    glNormal3fv(norm); // нормаль к поверхности останется неизменной
 
     // построение граней
     for (int i = 0; i < stripes; i++)
@@ -300,7 +300,7 @@ void drawOct()
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очищает буферы цвета и глубины
-    glLoadIdentity(); // замен¤ет текущую матрицу на единичную
+    glLoadIdentity(); // заменяет текущую матрицу на единичную
 
     if (isLight) glEnable(GL_LIGHT0); // включает источник света GL_LIGHT0
     else glDisable(GL_LIGHT0); // выключает источник света GL_LIGHT0
@@ -309,7 +309,7 @@ void display()
     {
         glEnable(GL_BLEND); // включает режим смешивания
         glDepthMask(GL_FALSE); // запрещает запись в буфер глубины
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE); // функция смешивани¤ дл¤ непрозрачности, базирующаяся на значении альфы
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE); // функция смешивания для непрозрачности, базирующаяся на значении альфы
     }
     else // если режим прозрачности выключен
     {
@@ -327,7 +327,7 @@ void display()
         glPopMatrix();
         glDisable(GL_TEXTURE_2D);
     }
-    else // если включен режим окрашивани¤
+    else // если включен режим окрашивания
     {
         glPushMatrix();
         glRotatef(rotateOctX, 1.0, 0.0, 0.0); // поворот по Oх
@@ -335,7 +335,7 @@ void display()
         if (!isListOct)
             drawOct(); // рисует октаэдр
         else
-            glCallList(list); // вызывает указанный список отображени¤
+            glCallList(list); // вызывает указанный список отображения
         glPopMatrix();
     }
 
@@ -345,7 +345,7 @@ void display()
     glLightfv(GL_LIGHT0, GL_POSITION, lightpos); // задание положения источника света
 
     glutSwapBuffers(); // обменивает буфера, отображая окно целиком после того, как оно уже сформировано
-    glFlush(); // отправляет все команды на выполненение, не дожида¤сь завершения выполнения команд. 
+    glFlush(); // отправляет все команды на выполненение, не дожидаясь завершения выполнения команд. 
 }
 
 // ------------- ПЕРЕСТРОЙКА ИЗОБРАЖЕНИЯ -----------------
@@ -353,7 +353,7 @@ void reshape(int w, int h)
 {
     glViewport(0, 0, WIN_WIDTH, WIN_HEIGHT); // задание области вывода (0,0) - левый нижний угол, (w, h) - ширина и высота
     glMatrixMode(GL_PROJECTION); // задание перспективной проекции;
-                                 // матрица проекций задает как будут проецироватьс¤ трехмерные объекты
+                                 // матрица проекций задает как будут проецироваться трехмерные объекты
                                  // на плоскость экрана (в оконные координаты)
     glLoadIdentity(); // заменяет текущую матрицу на единичную
     glOrtho(-WIN_WIDTH / 2, WIN_WIDTH / 2, -WIN_HEIGHT / 2, WIN_HEIGHT / 2, -500, 500); // задание ортографической (параллельной) проекции
@@ -511,8 +511,8 @@ void loadTexture()
 void init()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка буферов цвета и глубины
-    glEnable(GL_DEPTH_TEST); // включение теста глубины. OpenGL будет автоматически сохран¤ть значени¤ глубины дл¤ всех прошедших тест фрагментов и отбрасывать не прошедшие
-    glEnable(GL_LIGHTING); // включение глобального освещени¤
+    glEnable(GL_DEPTH_TEST); // включение теста глубины. OpenGL будет автоматически сохранять значения глубины дл¤ всех прошедших тест фрагментов и отбрасывать не прошедшие
+    glEnable(GL_LIGHTING); // включение глобального освещения
     glEnable(GL_LIGHT0); // включение источника света
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE); // двухстороннее освещение
 
@@ -520,9 +520,9 @@ void init()
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_col); // задание модели освещения рассеянный свет
     glEnable(GL_COLOR_MATERIAL); // включает управление свойством материала с помощью текущего цвета
 
-    list = glGenLists(1); // генерирует непрерывный набор пустых списков отображени¤
+    list = glGenLists(1); // генерирует непрерывный набор пустых списков отображения
     glNewList(list, GL_COMPILE); // формирование списка; список будет только сформирован (GL_COMPILE)
-    drawOctList(); // рисование октаэдра с помощью списка отображени¤
+    drawOctList(); // рисование октаэдра с помощью списка отображения
     glEndList(); // завершает работу со списком
 
     loadTexture(); // обрабатывает текстуры
@@ -531,7 +531,7 @@ void init()
 // -------------- ОСНОВНАЯ ФУНКЦИЯ -----------------
 int main(int argc, char* argv[])
 {
-    setlocale(LC_ALL, "RUSSIAN"); // установил русский ¤зык
+    setlocale(LC_ALL, "RUSSIAN"); // установил русский язык
 
     glutInit(&argc, argv); // инициализация функций библиотеки GLUT
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); // выбор режима отображения
